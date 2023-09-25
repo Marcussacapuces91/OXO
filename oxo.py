@@ -19,6 +19,7 @@ __copyright__ = """
 """
 __license__ = "Apache 2.0"
 
+
 class Board:
     def __init__(self):
         """Constructeur d'instance, initialise le tableau avec des espaces"""
@@ -53,9 +54,9 @@ class Board:
         return 0  # Match nul
 
     def __str__(self) -> str:
-        """Crée une représentation du plateau de jeu.
+        """Crée une représentation affichable du plateau de jeu.
 
-        :return: La représentation du jeu sous forme de caractères ASCII."""
+        :return: La représentation du jeu sous forme de caractères ASCII et de retours chariot."""
         s: str = " " * 5 + (" " * 5).join(chr(ord('A') + i) for i in range(3)) + "\n"
         s += "  +" + "-----+" * 3 + "\n"
         for i, _ in enumerate(self.board):
@@ -64,8 +65,8 @@ class Board:
         return s
 
     def __getitem__(self, key: (int, int)) -> str:
-        """Ajoute la capacité de lire un élément de la matrice avec une liste de 2 entiers
-        au moyen d'une syntaxe de tableau : Jeu[x, y]
+        """Accesseur en lecture, ajoutant la capacité de lire un élément de la matrice avec une liste de 2 entiers
+        au moyen d'une syntaxe de tableau : Jeu[x, y].
 
         :param key: Un tuple contenant les 2 index (x, y) de la matrice du jeu.
         :type key: (int, int)
@@ -77,20 +78,28 @@ class Board:
         return self.board[_row][_col]
 
     def __setitem__(self, key: (int, int), value: chr):
+        """Accesseur en écriture sur le tableau du jeu, ajoutant la capacité de modifier un élément de la matrice avec
+        une liste de 2 entiers au moyen d'une syntaxe de tableau : Jeu[x, y] = value.
+
+        :param key: Coordonnées sur le plateau de la case à modifier.
+        :type key: (int, int)
+        :param value: Valeur à appliquer aux coordonnées précédentes.
+        :type value: chr"""
         _row, _col = list(key)
         assert _row in (0, 1, 2) and _col in (0, 1, 2)
         assert value in ('X', 'O', ' ')
         self.board[_row][_col] = value
 
     def is_moves_left(self) -> bool:
-        """Indique s'il reste encore des emplacements libres : la partie peut se poursuivre."""
+        """Indique s'il reste encore des emplacements libres : la partie peut se poursuivre.
+        :return: True, si la partie peut continuer, False sinon."""
         return any(cell == ' ' for row in self.board for cell in row)
 
     def find_best_move(self) -> (int, int):
-        """Retourne le meilleur coup de X."""
+        """Retourne le meilleur coup de X.
+        :return: les coordonnées du meilleur coup."""
         best_move = (-1, -1)
         best_score = -float('inf')
-
         _all = list()
         for i in range(3):
             for j in range(3):
@@ -109,7 +118,7 @@ class Board:
             print("0+ C'est mort là !")
         elif min(_all) == 0 and max(_all) == 0:
             print("00 C'est indécis.")
-        elif min(_all) < 0 and max(_all) > 0:
+        elif min(_all) < 0 < max(_all):
             print("-+ Ah c'est gagné !")
         elif min(_all) < 0 and max(_all) == 0:
             print("-0")
@@ -118,11 +127,12 @@ class Board:
         return best_move
 
     def minimax(self, depth, is_maximizer) -> int:
-        """Algorithme du MinMax retournant la note du dernier cout selon le min ou le max.
+        """Algorithme du MinMax retournant la note du dernier coup selon le min ou le max.
         :param depth: Profondeur du coup à étudier.
         :type depth: int
         :param is_maximizer: Indique si recherche du min ou du max et du joueur courant.
         :type is_maximizer: bool
+        :return: Le score du meilleur coup.
         """
         if not self.is_moves_left():
             return 0
