@@ -15,4 +15,4 @@ Il suffit de lancer le code avec l'interpréteur [Python](https://docs.python.or
 ```> python oxo.py```
 
 ## Copyright
-Le code a été crit par M. SIBERT (:email:&nbsp;: contact@lab-allen.fr).
+Le code a été écrit par M. SIBERT (📧: contact@lab-allen.fr).
