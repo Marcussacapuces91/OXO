@@ -1,7 +1,8 @@
 ![Python](https://img.shields.io/badge/Python-v3.11-default?logo=python)
 ![GitHub](https://img.shields.io/github/license/Marcussacapuces91/OXO)
 ![Twitter Follow](https://img.shields.io/twitter/follow/laballen91)
-![Paypal Me](https://img.shields.io/badge/PayPal-default?logo=paypal)
+[![Paypal Me](https://img.shields.io/badge/PayPal-default?logo=paypal)](https://paypal.me/marcsibert)
+[![Python application](https://github.com/Marcussacapuces91/OXO/actions/workflows/python-app.yml/badge.svg)](https://github.com/Marcussacapuces91/OXO/actions/workflows/python-app.yml)
 
 # OXO
 OXO, tic-tac-toe, morpion jouant les coups de l'adversaire selon l'algorithme MinMax écrit en Python.
